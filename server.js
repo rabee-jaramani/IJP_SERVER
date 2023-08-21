@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
     secure: false, // use SSL
     auth: {
         user: 'ijp@apparelglobal.com', // Your email
-        pass: '64Ld!*52zXAtpVYt&XT$XOEsa', // Your email password
+        pass: '', // Your email password
     },
 });
 
