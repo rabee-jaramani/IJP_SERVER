@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
     service: 'SMTP',
     host: 'eu-smtp-outbound-1.mimecast.com',
     port: 587,
-    secure: true, // use SSL
+    secure: false, // use SSL
     auth: {
         user: 'ijp@apparelglobal.com', // Your email
         pass: '64Ld!*52zXAtpVYt&XT$XOEsa', // Your email password
