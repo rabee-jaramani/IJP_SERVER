@@ -26,7 +26,7 @@ const transporter = nodemailer.createTransport({
 // API endpoint to send email with attachment
 app.post('/send-email', upload.single('attachment'), (req, res) => {
     try {
-        const { to, subject, text, attachment } = req.body;
+        const { to, subject, text } = req.body;
 
         var mailOptions = {
             from: 'ijp@apparelglobal.com', // Your email
