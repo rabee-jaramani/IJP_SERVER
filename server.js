@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
     service: 'SMTP',
     host: 'eu-smtp-outbound-1.mimecast.com',
     port: 587,
-    secure: true, // use SSL
+    secure: false, // use SSL
     auth: {
         user: 'ijp@apparelglobal.com', // Your email
         pass: '64Ld!*52zXAtpVYt&XT$XOEsa', // Your email password
@@ -52,15 +52,12 @@ transporter.verify((err, success) => {
     if (success) console.log('Your config is correct');
 });
 
-
-
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 app.get('/', (req, res) => {
     res.send('Server is running!');
 });
 app.get('/hi', (req, res) => {
     res.send('hi thereX');
+});
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
