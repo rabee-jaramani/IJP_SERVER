@@ -53,13 +53,14 @@ const upload = multer({ storage: storage });
 // });
 
 
+
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 app.get('/', (req, res) => {
     res.send('Server is running!');
 });
 app.get('/hi', (req, res) => {
     res.send('hi thereX');
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
 });
