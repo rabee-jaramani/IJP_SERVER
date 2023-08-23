@@ -1,19 +1,12 @@
 const express = require('express');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
-// const path = require('path');
 const cors = require("cors");
 
 
 const app = express();
-// const router = express.Router();
 const PORT = process.env.PORT || 5000;
 app.use(cors());
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://apparelglobal.com"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 // Configure storage for file uploads
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -23,7 +16,7 @@ const transporter = nodemailer.createTransport({
     service: 'SMTP',
     host: 'eu-smtp-outbound-1.mimecast.com',
     port: 587,
-    secure: false, // use SSL
+    secure: true, // use SSL
     auth: {
         user: 'ijp@apparelglobal.com', // Your email
         pass: '64Ld!*52zXAtpVYt&XT$XOEsa', // Your email password
@@ -31,17 +24,19 @@ const transporter = nodemailer.createTransport({
 });
 
 // API endpoint to send email with attachment
-app.post('/send-email', upload.single('attachment'), (req, res, next) => {
-    const { to, subject, text } = req.body;
+app.post('/send-email', upload.single('attachment'), (req, res) => {
+    try {
+        const { to, subject, text } = req.body;
 
-    const mailOptions = {
-        from: 'ijp@apparelglobal.com', // Your email
-        to: to,
-        subject: subject,
-        text: text,
-    };
-
-
+        var mailOptions = {
+            from: 'ijp@apparelglobal.com', // Your email
+            to: to,
+            subject: subject,
+            text: text,
+        };
+    } catch (error) {
+        res.send("Error from post request", error)
+    }
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.error(error);
@@ -54,15 +49,15 @@ app.post('/send-email', upload.single('attachment'), (req, res, next) => {
 });
 transporter.verify((err, success) => {
     if (err) console.error(err);
-    console.log('Your config is correct');
+    if (success) console.log('Your config is correct');
 });
 
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Server is running!');
 });
-app.get('/rabee', (req, res) => {
-    res.send('HELOO RABEE');
+app.get('/hi', (req, res) => {
+    res.send('hi thereX');
 });
 
 app.listen(PORT, () => {
