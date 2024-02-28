@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-
+require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(cors());
@@ -13,12 +13,12 @@ const upload = multer({ storage: storage });
 // Set up nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: 'SMTP',
-  host: 'eu-smtp-outbound-1.mimecast.com',
-  port: 587,
+  host: process.env.HOST,
+  port: process.env.TRANSPORT_PORT,
   secure: false, // use SSL
   auth: {
-    user: 'ijp@apparelglobal.com', // Your email
-    pass: '64Ld!*52zXAtpVYt&XT$XOEsa', // Your email password
+    user: process.env.USER, // Your email
+    pass: process.env.PASS, // Your email password
   },
 });
 
