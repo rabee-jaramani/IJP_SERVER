@@ -28,7 +28,8 @@ app.post('/send-email', upload.single('attachment'), (req, res) => {
     const { to, subject, text } = req.body;
 
     var mailOptions = {
-      from: process.env.FROM_EMAIL, // Your email
+      // the email that uses to send emails to recruiters
+      from: process.env.FROM_EMAIL,
       to: to,
       subject: subject,
       text: text,
