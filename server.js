@@ -28,7 +28,7 @@ app.post('/send-email', upload.single('attachment'), (req, res) => {
     const { to, subject, text } = req.body;
 
     var mailOptions = {
-      from: 'ijp@apparelglobal.com', // Your email
+      from: process.env.FROM_EMAIL, // Your email
       to: to,
       subject: subject,
       text: text,
